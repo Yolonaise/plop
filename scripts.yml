@@ -1,0 +1,11 @@
+scripts:
+  start:
+    desc: Runs the server 
+    cmd: deno run index.ts
+    tsconfig: tsconfig.json
+    env:
+      API_PORT: 5200
+      API_HOSTNAME: '127.0.0.1'
+    allow:
+      - env
+      - net

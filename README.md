@@ -1,8 +1,6 @@
-# plop
-For ploppin purposes
-
+# Plop
 Welcome to the wonderful world of **Plop** the little deno.
-> Let's run with me !
+> Let's run with me ! - *Plop the little deno*
 
 ## What's for ?
 - Undertanding deno framework and how to code with

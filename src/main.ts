@@ -1,5 +1,6 @@
 import configureServer from './startup.ts';
 import { apiConfig } from './configurations/configuration.ts';
+import { defaultBuilder } from './builders/database.builder.ts';
 
 export async function main (_: string[] = []): Promise<void> {
   // Titling the application
@@ -9,6 +10,9 @@ export async function main (_: string[] = []): Promise<void> {
     ' )___\/ )(__  )(_)(  )___/\n' +
     '(__)  (____)(_____)(__)  \n'
   );
+
+  // Config the database
+  await defaultBuilder.init();
 
   // Config the Main plop and launch it
   configureServer()

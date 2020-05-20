@@ -3,7 +3,7 @@ import { HomeArea } from './controllers/areas/home.area.ts';
 import { RoomArea } from './controllers/areas/room.area.ts';
 import ApplicationBuilder from './builders/application.builder.ts';
 
-export default function configureServer(): App {  
+export default function configureServer(): App {
   return new ApplicationBuilder()
     .userCors(c => c
       .AllowAnyOrigin()

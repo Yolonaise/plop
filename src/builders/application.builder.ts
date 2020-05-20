@@ -1,4 +1,4 @@
-import { App, CorsBuilder } from 'https://deno.land/x/alosaur/src/mod.ts';
+import { App, CorsBuilder } from '../../deps.ts';
 import AppSettingsBuilder from './appSettings.builder.ts';
 
 type AppSettingBuilderHandler = (a: AppSettingsBuilder) => AppSettingsBuilder;

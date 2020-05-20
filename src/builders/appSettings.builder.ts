@@ -1,4 +1,4 @@
-import { AppSettings } from "https://deno.land/x/alosaur/src/mod.ts";
+import { AppSettings } from '../../deps.ts';
 
 export default class AppSettingsBuilder {
   private settings: AppSettings;

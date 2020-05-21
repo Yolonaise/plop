@@ -5,9 +5,9 @@ export const apiConfig = {
 };
 
 export const dbConfig =  {
-  user: Deno.env.get('POSTGRES_USER') ?? 'trex',
-  password: Deno.env.get('POSTGRES_PASSWORD') ?? 'trexxx',
-  database: Deno.env.get('POSTGRES_DB') ?? 'plop_db'
+  host: Deno.env.get('DB_HOST') ?? 'diplo',
+  port: toInt(Deno.env.get('DB_PORT')) ?? 27017,
+  database: Deno.env.get('DB_DATABASE') ?? 'plop_home'
 }
 
 function toInt(value?: string): number | null {

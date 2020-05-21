@@ -13,13 +13,14 @@ export async function main (_: string[] = []): Promise<void> {
 
   // Config the database
   await defaultBuilder.init();
+  console.log(`**** Diplo is here ****`);
 
   // Config the Main plop and launch it
   configureServer()
     .listen(`${apiConfig.hostname}:${apiConfig.port}`);
 
   // nothing interresting here
-  console.log(`**** plopping *****`);
+  console.log(`******* Plopping ******`);
 } 
 
 export default main;

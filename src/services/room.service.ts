@@ -12,15 +12,12 @@ export class RoomService {
   }
 
   async createRoomAsync(room: IRoom): Promise<IRoom> {
-    if(await this.repo.existsAsync(room.id))
-      throw(`room (${room.id}) already exits`);
-
     return await this.repo.createRoomAsync(room);
   }
 
   async updateRoomAsync(room: IRoom): Promise<IRoom> {
-    if(!await this.repo.existsAsync(room.id))
-      throw(`room (${room.id}) not found`);
+    if(!await this.repo.existsAsync(room._id.$oid))
+      throw(`room (${room._id.$oid}) not found`);
     return await this.repo.updateRoomAsync(room);
   }
 

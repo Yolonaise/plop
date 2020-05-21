@@ -7,8 +7,8 @@ class DatabaseBuilder {
     this.context = new PlopContext();
   }
   
-  async init(): Promise<any>{
-    await this.context.init();
+  init(): void {
+    this.context.init();
   }
 }
 

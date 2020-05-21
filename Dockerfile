@@ -2,12 +2,12 @@ FROM hayd/alpine-deno:1.0.0
 
 WORKDIR /app
 
-USER deno
+USER root
 
 COPY deps.ts .
-RUN deno cache deps.ts
+RUN deno cache --unstable deps.ts
 
 COPY . .
-RUN deno cache -c tsconfig.json index.ts
+RUN deno cache --unstable -c tsconfig.json index.ts
 
-CMD ["run", "--allow-net", "--allow-env", "-c", "tsconfig.json", "index.ts"]
+CMD ["run","-A","-c","tsconfig.json","--unstable","index.ts"]

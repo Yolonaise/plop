@@ -1,7 +1,12 @@
 scripts:
+  cache: 
+    desc: cache modules
+    cmd: deno cache --unstable deps.ts
+    tsconfig: tsconfig.json
+  #for component stuffin
   start:
     desc: Runs the server 
-    cmd: deno run index.ts
+    cmd: deno run --unstable index.ts
     tsconfig: tsconfig.json
     env:
       API_CONFIGURATION: 'dev.local'
@@ -10,7 +15,10 @@ scripts:
     allow:
       - env
       - net
-  start-i:
+      - read
+      - write
+  #for intergartion stuffin
+  docker:
     desc: Runs the server 
     cmd: 
       - docker-compose build
@@ -20,6 +28,6 @@ scripts:
       API_CONFIGURATION: 'dev.docker'
       API_PORT: 5200
       API_HOSTNAME: '0.0.0.0'
-      POSTGRES_USER: 'trex'
-      POSTGRES_PASSWORD: 'trexxx'
-      POSTGRES_DB: 'plop_db'
+      DB_HOST: 'localhost'
+      DB_PORT: 27017 
+      DB_DATABASE: 'plop_home'

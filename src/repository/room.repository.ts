@@ -1,32 +1,31 @@
 import { IRoom } from '../models/room.model.ts';
-import { Injectable } from '../../deps.ts';
-
-const db:{[id: string] : IRoom} = {};
-
-db['1'] = { id: '1', name: 'living room'};
-db['2'] = { id: '2', name: 'bathroom'};
+import { Injectable, Inject } from '../../deps.ts';
+import PlopContext from './plop.context.ts';
 
 @Injectable()
 export class RoomRepository {
+
+  constructor(@Inject(PlopContext) private context: PlopContext) {}
+
   async getRoomAsync(id: string): Promise<IRoom> {
-    return db[id];
+    return await this.context.rooms().findOne({_id:{ $oid: id}});
   }
 
   async existsAsync(id: string): Promise<boolean> {
-    return db[id] !== undefined;
+    return (await this.context.rooms().findOne({_id: { $oid: id}})) !== undefined;
   }
 
   async createRoomAsync(room: IRoom): Promise<IRoom> {
-    db[room.id]=room;
-    return room;
+    const id = await this.context.rooms().insertOne(room);
+    return {...room, _id: id};
   }
 
   async updateRoomAsync(room: IRoom): Promise<IRoom> {
-    db[room.id]=room;
-    return room;
+    await this.context.rooms().updateOne({_id:  room._id}, room);
+    return {...room};
   }
 
   async deleteRoomAsync(id: string): Promise<any> {
-    delete db[id];
+    await this.context.rooms().deleteOne({_id:{ $oid: id}});
   }
 }

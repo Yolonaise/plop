@@ -1,25 +1,8 @@
 /*
 * Alosaur
 */
-export { 
-  App,
-  Area,
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  CorsBuilder,
-  AppSettings,
-  Param,
-  Body,
-  container,
-  Injectable,
-  Inject
-} from 'https://deno.land/x/alosaur/src/mod.ts';
-
-export { 
-  DATA_TYPES,
-  Database,
-  Model
- } from 'https://deno.land/x/denodb/mod.ts';
+export * from 'https://deno.land/x/alosaur/src/mod.ts';
+/*
+* Mongo
+*/
+export * from "https://deno.land/x/mongo@v0.7.0/mod.ts";

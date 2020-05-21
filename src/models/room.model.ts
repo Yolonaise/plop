@@ -1,4 +1,6 @@
 export interface IRoom {
-  id: string;
+  _id: {
+    $oid: string;
+  };
   name: string;
 }

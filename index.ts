@@ -1,3 +1,3 @@
-import main from './src/main.ts';
+import main from "./src/main.ts";
 
-main()
+main();

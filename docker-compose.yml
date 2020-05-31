@@ -18,6 +18,7 @@ services:
       - diplo
     depends_on: 
       - diplo
+      - rabbit
 
   diplo:
     image: mongo:latest
@@ -28,6 +29,27 @@ services:
       MONGO_INITDB_DATABASE: ${DB_DATABASE}
     volumes:
       - mongodb_data_container:/data/db
+
+  rabbit:
+    image: rabbitmq:management-alpine
+    container_name: rabbit
+    expose:
+      - ${RABBIT_PORT}
+    ports:
+      - ${RABBIT_PORT}:${RABBIT_PORT}
+      - 15672:15672
+    volumes:
+          - ./data/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit@app-rabbitmq:cached
+    environment:
+        RABBITMQ_ERLANG_COOKIE: 6085e2412b6fa88647466c6a81c0cea0
+        RABBITMQ_DEFAULT_USER: rabbitmq
+        RABBITMQ_DEFAULT_PASS: rabbitmq
+        RABBITMQ_DEFAULT_VHOST: /
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
 volumes:
   mongodb_data_container:

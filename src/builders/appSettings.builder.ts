@@ -1,4 +1,4 @@
-import { AppSettings } from '../../deps.ts';
+import { AppSettings } from "../../deps.ts";
 
 export default class AppSettingsBuilder {
   private settings: AppSettings;
@@ -7,7 +7,7 @@ export default class AppSettingsBuilder {
     this.settings = { areas: [] } as AppSettings;
   }
 
-  addArea(area: ()=>{}): AppSettingsBuilder {
+  addArea(area: () => {}): AppSettingsBuilder {
     this.settings.areas.push(area);
     return this;
   }

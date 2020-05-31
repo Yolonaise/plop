@@ -5,8 +5,7 @@ import {
   Post,
   Body,
   Put,
-  Delete,
-  container
+  Delete
 } from '../../deps.ts';
 import { RoomService } from '../services/room.service.ts';
 import { IRoom } from '../models/room.model.ts';

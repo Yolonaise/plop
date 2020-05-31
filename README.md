@@ -9,4 +9,5 @@ Welcome to the wonderful world of **Plop** the little deno.
 - [velociraptor](https://deno.land/x/velociraptor)
 - [alausor](https://deno.land/x/alausor)
 - [deno_mongo](https://deno.land/x/mongo)
+- [amqp](https://deno.land/x/deno-amqp)
 

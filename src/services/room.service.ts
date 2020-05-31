@@ -1,6 +1,6 @@
-import { Injectable, Inject } from '../../deps.ts';
-import { RoomRepository } from '../repository/room.repository.ts';
-import { IRoom } from '../models/room.model.ts';
+import { Injectable, Inject } from "../../deps.ts";
+import { RoomRepository } from "../repository/room.repository.ts";
+import { IRoom } from "../models/room.model.ts";
 
 @Injectable()
 export class RoomService {
@@ -16,8 +16,9 @@ export class RoomService {
   }
 
   async updateRoomAsync(room: IRoom): Promise<IRoom> {
-    if(!await this.repo.existsAsync(room._id.$oid))
-      throw(`room (${room._id.$oid}) not found`);
+    if (!await this.repo.existsAsync(room._id.$oid)) {
+      throw (`room (${room._id.$oid}) not found`);
+    }
     return await this.repo.updateRoomAsync(room);
   }
 

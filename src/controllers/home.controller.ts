@@ -1,9 +1,9 @@
-import { Controller, Get } from '../../deps.ts';
+import { Controller, Get } from "../../deps.ts";
 
-@Controller('/')
+@Controller("/")
 export class HomeController {
-    @Get('status')
-    text() {
-        return 'Hello world!';
-    }
+  @Get("status")
+  text() {
+    return "Hello world!";
+  }
 }

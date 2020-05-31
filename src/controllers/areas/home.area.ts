@@ -1,5 +1,5 @@
-import { Area } from '../../../deps.ts'
-import { HomeController } from '../home.controller.ts'
+import { Area } from "../../../deps.ts";
+import { HomeController } from "../home.controller.ts";
 
 @Area({
   controllers: [HomeController],

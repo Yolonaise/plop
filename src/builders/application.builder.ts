@@ -1,13 +1,13 @@
-import { App, CorsBuilder } from '../../deps.ts';
-import AppSettingsBuilder from './appSettings.builder.ts';
+import { App, CorsBuilder } from "../../deps.ts";
+import AppSettingsBuilder from "./appSettings.builder.ts";
 
 type AppSettingBuilderHandler = (a: AppSettingsBuilder) => AppSettingsBuilder;
 type CorsBuilderHandler = (c: CorsBuilder) => CorsBuilder;
 
 export default class ApplicationBuilder {
-  appSettingsBuilderHandler?: AppSettingBuilderHandler 
+  appSettingsBuilderHandler?: AppSettingBuilderHandler;
   corsBuilderHandler?: CorsBuilderHandler;
-
+  
   constructor() {
   }
 
@@ -16,16 +16,19 @@ export default class ApplicationBuilder {
     return this;
   }
 
-  userCors(builder: CorsBuilderHandler):  ApplicationBuilder {
+  userCors(builder: CorsBuilderHandler): ApplicationBuilder {
     this.corsBuilderHandler = builder;
     return this;
   }
 
-  build() : App {
-    const result = new App(this.appSettingsBuilderHandler!(new AppSettingsBuilder()).build());
-    
-    if(this.corsBuilderHandler)
-      result.useCors(this.corsBuilderHandler(new CorsBuilder));
+  build(): App {
+    const result = new App(
+      this.appSettingsBuilderHandler!(new AppSettingsBuilder()).build(),
+    );
+
+    if (this.corsBuilderHandler) {
+      result.useCors(this.corsBuilderHandler(new CorsBuilder()));
+    }
 
     return result;
   }

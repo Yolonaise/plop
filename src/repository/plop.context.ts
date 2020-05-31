@@ -1,10 +1,10 @@
-import { 
+import {
   Injectable,
-  MongoClient, 
+  MongoClient,
   Database,
   Collection,
-} from '../../deps.ts';
-import { dbConfig } from '../configurations/configuration.ts';
+} from "../../deps.ts";
+import { dbConfig } from "../configurations/configuration.ts";
 
 let mainClient: MongoClient;
 let maintDatabase: Database;
@@ -12,11 +12,10 @@ let rooms: Collection;
 
 @Injectable()
 export default class PlopContext {
-  
   constructor() {
   }
 
-  async init():Promise<any> {
+  async init(): Promise<any> {
     // connection time
     const client = new MongoClient();
     client.connectWithUri(`mongodb://diplo:${dbConfig.port}`);
@@ -27,5 +26,7 @@ export default class PlopContext {
     rooms = maintDatabase.collection(`Rooms`);
   }
 
-  rooms() { return rooms };
+  rooms() {
+    return rooms;
+  }
 }

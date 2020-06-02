@@ -1,16 +1,10 @@
-import { ApplicationBuilder } from "./builders/application.builder.ts";
+import ApplicationBuilder from "./builders/application.builder.ts";
 import { HomeArea } from "./controllers/areas/home.area.ts";
 import { RoomArea } from "./controllers/areas/room.area.ts";
 
-declare module "./builders/application.builder.ts" {
-  interface ApplicationBuilder {
-    addControllers(): ApplicationBuilder;
-  }
-}
-  
 
-ApplicationBuilder.prototype.addControllers = function (): ApplicationBuilder {
-  return this
+export function addControllers (builder: ApplicationBuilder) {
+  builder
     .userCors((c) =>
       c.AllowAnyOrigin()
        .AllowAnyMethod()

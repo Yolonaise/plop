@@ -2,7 +2,7 @@ import { App, CorsBuilder } from "../../deps.ts";
 import AppSettingsBuilder from "./appSettings.builder.ts";
 
 type AppSettingBuilderHandler = (a: AppSettingsBuilder) => AppSettingsBuilder;
-type CorsBuilderHandler = (c: CorsBuilder) => CorsBuilder;
+type CorsBuilderHandler = (c: CorsBuilder<unknown>) => CorsBuilder<unknown>;
 
 export default class ApplicationBuilder {
   appSettingsBuilderHandler?: AppSettingBuilderHandler;
@@ -21,7 +21,7 @@ export default class ApplicationBuilder {
     return this;
   }
 
-  build(): App {
+  build(): App<unknown> {
     const result = new App(
       this.appSettingsBuilderHandler!(new AppSettingsBuilder()).build(),
     );

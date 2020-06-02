@@ -1,7 +1,7 @@
 import { apiConfig } from "./configurations/configuration.ts";
-import "./startup.ts";
 import { defaultBuilder } from "./builders/database.builder.ts";
 import ApplicationBuilder from "./builders/application.builder.ts";
+import { addControllers } from "./AppExtension.ts";
 
 export async function main(_: string[] = []): Promise<void> {
   // Titling the application
@@ -13,13 +13,14 @@ export async function main(_: string[] = []): Promise<void> {
   );
 
   //Creating the app
-  const app = new ApplicationBuilder();
+  const builder = new ApplicationBuilder();
+  addControllers(builder);
 
   // Config the database
   defaultBuilder.init();
   console.log(`**** Diplo is here ****`);
   
- 
+  builder.build().listen(`${apiConfig.hostname}:${apiConfig.port}`);
 
   // nothing interresting here
   console.log(`******* Plopping ******`);

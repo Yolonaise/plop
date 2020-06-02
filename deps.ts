@@ -1,7 +1,7 @@
 /*
 * Alosaur
 */
-export * from "https://deno.land/x/alosaur/src/mod.ts";
+export * from "https://deno.land/x/alosaur/mod.ts";
 /*
 * Mongo
 */

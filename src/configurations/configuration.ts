@@ -1,3 +1,5 @@
+import { IConfiguration } from '../../deps.ts' 
+
 export const apiConfig = {
   configuration: Deno.env.get("API_CONFIGURATION") ?? "local",
   hostname: Deno.env.get("API_HOSTNAME") ?? "localhost",
@@ -13,3 +15,10 @@ export const dbConfig = {
 function toInt(value?: string): number | null {
   return value ? parseInt(value) : null;
 }
+
+export const rabbitConfig = {
+  host: Deno.env.get("RABBIT_HOST") ?? "rabbit",
+  port: toInt(Deno.env.get("RABBIT_PORT") ?? "5672"),
+  password: Deno.env.get("RABBIT_PASSWORD") ?? "rabbitmq",
+  username: Deno.env.get("RABBIT_USERNAME") ?? "rabbitmq",
+} as IConfiguration

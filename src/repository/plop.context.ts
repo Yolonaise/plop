@@ -3,6 +3,7 @@ import {
   MongoClient,
   Database,
   Collection,
+  InternalServerError,
 } from "../../deps.ts";
 import { dbConfig } from "../configurations/configuration.ts";
 
@@ -28,5 +29,14 @@ export default class PlopContext {
 
   rooms() {
     return rooms;
+  }
+
+  async reqRooms(func: (c: Collection) => Promise<any>): Promise<any> {
+    try {
+      return await func(this.rooms())
+    } catch(err) {
+      console.log({err});
+      throw new InternalServerError("diplo has failed");
+    }
   }
 }

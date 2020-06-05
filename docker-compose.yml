@@ -8,6 +8,7 @@ services:
     ports:
       - ${API_PORT}:${API_PORT}
     environment: 
+      RUST_BACKTRACE: full
       API_CONFIGURATION: ${API_CONFIGURATION}
       API_PORT: ${API_PORT}
       API_HOSTNAME: ${API_HOSTNAME}

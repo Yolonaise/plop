@@ -1,4 +1,4 @@
-import { IConfiguration } from '../../deps.ts' 
+import { IConfiguration } from "../../deps.ts";
 
 export const apiConfig = {
   configuration: Deno.env.get("API_CONFIGURATION") ?? "local",
@@ -21,4 +21,4 @@ export const rabbitConfig = {
   port: toInt(Deno.env.get("RABBIT_PORT") ?? "5672"),
   password: Deno.env.get("RABBIT_PASSWORD") ?? "rabbitmq",
   username: Deno.env.get("RABBIT_USERNAME") ?? "rabbitmq",
-} as IConfiguration
+} as IConfiguration;

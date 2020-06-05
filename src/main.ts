@@ -19,7 +19,7 @@ export async function main(_: string[] = []): Promise<void> {
   // Config the database
   defaultBuilder.init();
   console.log(`**** Diplo is here ****`);
-  
+
   builder.build().listen(`${apiConfig.hostname}:${apiConfig.port}`);
 
   // nothing interresting here

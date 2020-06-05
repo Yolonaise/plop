@@ -15,6 +15,12 @@ export class RoomController {
 
   constructor(private service: RoomService) { }
 
+  @Get('/')
+  async getRoomsAsync() {
+      return await this.service.getAll();
+  }
+
+
   @Get('/:id')
   async getRoomAsync(@Param('id') id: string) {
       return await this.service.getRoomAsync(id);

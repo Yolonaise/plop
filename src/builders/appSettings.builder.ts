@@ -8,7 +8,15 @@ export default class AppSettingsBuilder {
   }
 
   addArea(area: () => {}): AppSettingsBuilder {
-    this.settings.areas.push(area);
+    this.settings.areas = [...this.settings.areas, area];
+    return this;
+  }
+
+  addMiddleware(middleware: () => {}): AppSettingsBuilder {
+    this.settings.middlewares = [
+      ...this.settings.middlewares ? this.settings.middlewares : [],
+      middleware,
+    ];
     return this;
   }
 

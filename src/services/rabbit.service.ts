@@ -1,11 +1,11 @@
-import  { 
+import {
   Singleton,
   RabbitFactory,
   TopicProducer,
-  Producer
-} from '../../deps.ts';
-import { rabbitConfig } from '../configurations/configuration.ts';
-import { RoomMessage } from '../models/rabbit/rooms.message.ts';
+  Producer,
+} from "../../deps.ts";
+import { rabbitConfig } from "../configurations/configuration.ts";
+import { RoomMessage } from "../models/rabbit/rooms.message.ts";
 
 @Singleton()
 export class Rabbit {

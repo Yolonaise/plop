@@ -1,7 +1,7 @@
 import { apiConfig } from "./configurations/configuration.ts";
 import { defaultBuilder } from "./builders/database.builder.ts";
 import ApplicationBuilder from "./builders/application.builder.ts";
-import { addControllers } from "./AppExtension.ts";
+import { addControllers } from "./app.extension.ts";
 
 export async function main(_: string[] = []): Promise<void> {
   // Titling the application

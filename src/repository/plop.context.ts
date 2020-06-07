@@ -21,11 +21,11 @@ export default class PlopContext {
     const client = new MongoClient();
     client.connectWithUri(`mongodb://diplo:${dbConfig.port}`);
     mainClient = client;
-    
+
     maintDatabase = mainClient.database(`${dbConfig.database}`);
-    
+
     rooms = maintDatabase.collection("Rooms");
-    devices = maintDatabase.collection("Devices")
+    devices = maintDatabase.collection("Devices");
   }
 
   rooms() {
@@ -36,13 +36,17 @@ export default class PlopContext {
     return devices;
   }
 
-  async sendRequestAsync(collection: Collection, func: (c: Collection) => Promise<any>): Promise<any> {
+  async sendRequestAsync(
+    collection: Collection,
+    func: (c: Collection) => Promise<any>,
+  ): Promise<any> {
     try {
-      if(!collection)
+      if (!collection) {
         throw new InternalServerError("no collection provided");
-      return await func(collection)
-    } catch(err) {
-      console.log({err});
+      }
+      return await func(collection);
+    } catch (err) {
+      console.log({ err });
       throw new InternalServerError("diplo has failed");
     }
   }

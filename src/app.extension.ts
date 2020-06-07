@@ -22,7 +22,10 @@ export function addControllers(builder: ApplicationBuilder) {
     )
     .useError((c, err) => {
       c.response.result = Content(
-        { reason: (err as HttpError).message || "Server has process an error, please try later" },
+        {
+          reason: (err as HttpError).message ||
+            "Server has process an error, please try later",
+        },
         (err as HttpError).httpCode || 500,
       );
       c.response.setImmediately();

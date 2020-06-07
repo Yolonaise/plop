@@ -18,7 +18,7 @@ export class DeviceValidator implements IValidator<IDevice> {
       throw new BadRequestError("Must have an name");
     }
   }
-  
+
   onDelete(ref: string): void {
     if (!ref || ref == "") {
       throw new BadRequestError("no ref provided");

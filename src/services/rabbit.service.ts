@@ -19,7 +19,7 @@ export class Rabbit {
   async getRoomProducerAsync(): Promise<Producer<RoomMessage>> {
     return await this.factory.getProducer(TopicProducer, RoomMessage);
   }
-  
+
   async getDeviceProducerAsync(): Promise<Producer<DeviceMessage>> {
     return await this.factory.getProducer(TopicProducer, DeviceMessage);
   }

@@ -1,32 +1,31 @@
-import { 
+import {
   Inject,
   Content,
   NotFoundError,
-  Injectable
+  Injectable,
 } from "../../deps.ts";
 import { DeviceRepository } from "../repository/device.repository.ts";
 import { IDevice } from "../models/device.model.ts";
 import { DeviceValidator } from "./validators/device.validator.ts";
 import { Rabbit } from "./rabbit.service.ts";
-import { 
-  createDeviceCreated, 
+import {
+  createDeviceCreated,
   createDeviceUpdated,
-  createDeviceDeleted
+  createDeviceDeleted,
 } from "../models/rabbit/helper/device.factory.ts";
 
 @Injectable()
 export class DeviceService {
-
   constructor(
     @Inject(DeviceRepository) private repo: DeviceRepository,
     @Inject(DeviceValidator) private validator: DeviceValidator,
-    @Inject(Rabbit) private rabbit: Rabbit)
-    { }
+    @Inject(Rabbit) private rabbit: Rabbit,
+  ) {}
 
   async getAllAsync(): Promise<IDevice[]> {
     return await this.repo.getAllAsync();
   }
-  
+
   async getDeviceAsync(id: string): Promise<IDevice> {
     this.validator.onGet(id);
     return await this.repo.getDeviceAsync(id);

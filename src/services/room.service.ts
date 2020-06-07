@@ -17,8 +17,8 @@ export class RoomService {
     @Inject(RoomValidator) private validator: RoomValidator,
   ) { }
 
-  async getAll(): Promise<IRoom[]> {
-    return await this.repo.getAll();
+  async getAllAsync(): Promise<IRoom[]> {
+    return await this.repo.getAllAsync();
   }
   
   async getRoomAsync(id: string): Promise<IRoom> {

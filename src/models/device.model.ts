@@ -1,7 +1,7 @@
-export interface IRoom {
+export interface IDevice {
   _id: {
     $oid: string;
   };
   name: string;
-  devices: string[];
+  type: string;
 }

@@ -10,6 +10,7 @@ import { dbConfig } from "../configurations/configuration.ts";
 let mainClient: MongoClient;
 let maintDatabase: Database;
 let rooms: Collection;
+let devices: Collection;
 
 @Injectable()
 export default class PlopContext {
@@ -17,23 +18,29 @@ export default class PlopContext {
   }
 
   async init(): Promise<any> {
-    // connection time
     const client = new MongoClient();
     client.connectWithUri(`mongodb://diplo:${dbConfig.port}`);
     mainClient = client;
-    // Instanciate Database.
+    
     maintDatabase = mainClient.database(`${dbConfig.database}`);
-    // Get tables and other stuffs
-    rooms = maintDatabase.collection(`Rooms`);
+    
+    rooms = maintDatabase.collection("Rooms");
+    devices = maintDatabase.collection("Devices")
   }
 
   rooms() {
     return rooms;
   }
 
-  async reqRooms(func: (c: Collection) => Promise<any>): Promise<any> {
+  devices() {
+    return devices;
+  }
+
+  async sendRequestAsync(collection: Collection, func: (c: Collection) => Promise<any>): Promise<any> {
     try {
-      return await func(this.rooms())
+      if(!collection)
+        throw new InternalServerError("no collection provided");
+      return await func(collection)
     } catch(err) {
       console.log({err});
       throw new InternalServerError("diplo has failed");

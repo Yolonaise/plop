@@ -3,6 +3,7 @@ import { HomeArea } from "./controllers/areas/home.area.ts";
 import { RoomArea } from "./controllers/areas/room.area.ts";
 import { LogMiddleware } from "./middlewares/log.middleware.ts";
 import { HttpError, Content } from "../deps.ts";
+import { DeviceArea } from "./controllers/areas/device.area.ts";
 
 export function addControllers(builder: ApplicationBuilder) {
   builder
@@ -12,8 +13,10 @@ export function addControllers(builder: ApplicationBuilder) {
         .AllowAnyHeader()
     )
     .useSettings((s) =>
-      s.addArea(() => HomeArea)
+      s
+        .addArea(() => HomeArea)
         .addArea(() => RoomArea)
+        .addArea(() => DeviceArea)
         .addMiddleware(() => LogMiddleware)
         .withLogging(false)
     )

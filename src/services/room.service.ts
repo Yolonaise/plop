@@ -9,6 +9,7 @@ import {
 } from "../models/rabbit/helper/rooms.factory.ts";
 import { RoomValidator } from "./validators/room.validator.ts";
 import { DeviceRepository } from "../repository/device.repository.ts";
+import { mapToIds } from "../helpers/mongo.helper.ts";
 
 @Injectable()
 export class RoomService {
@@ -68,22 +69,19 @@ export class RoomService {
       return [];
     }
 
-    let exists: string[] = [];
-    for (const id of room.devices) {
-      if (await this.deviceRepo.existsAsync(id)) {
-        exists.push(id);
-      }
-    }
+    const exists = (await this.deviceRepo
+      .getFilteredAsync({ _id: { $all: mapToIds(room.devices) } })).map((d) =>
+        d._id.$oid
+      );
 
-    (await this.repo.getFilteredAsync(
-      { devices: { $all: exists } },
-    )).forEach(async (r) => {
-      if (r._id === room._id) {
-        return;
-      }
-      r.devices = r.devices.filter((i) => !exists.includes(i));
-      await this.repo.updateRoomAsync(r);
-    });
+    (await this.repo.getFilteredAsync({ devices: { $all: exists } }))
+      .forEach(async (r) => {
+        if (r._id === room._id) {
+          return;
+        }
+        r.devices = r.devices.filter((i) => !exists.includes(i));
+        await this.repo.updateRoomAsync(r);
+      });
 
     room.devices = exists;
   }

@@ -5,12 +5,18 @@ import { IRoom } from "../../models/room.model.ts";
 @Injectable()
 export class RoomValidator implements IValidator<IRoom> {
   onCreate(model: IRoom): void {
+    if(!model) {
+      throw new BadRequestError("Request is not correct");
+    }
     if (!model.name || model.name == "") {
       throw new BadRequestError("Must have a name");
     }
   }
 
   onUpdate(model: IRoom): void {
+    if(!model) {
+      throw new BadRequestError("Request is not correct");
+    }
     if (!model._id || !model._id.$oid || model._id.$oid == "") {
       throw new BadRequestError("Must have an id");
     }

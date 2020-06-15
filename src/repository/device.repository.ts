@@ -24,6 +24,13 @@ export class DeviceRepository {
     );
   }
 
+  async getFilteredAsync(filter: object): Promise<IDevice[]> {
+    return await this.context.sendRequestAsync(
+      this.context.devices(),
+      (c) => c.find(filter),
+    );
+  }
+
   async getDeviceAsync(id: string): Promise<IDevice> {
     return await this.context.sendRequestAsync(
       this.context.devices(),

@@ -3,5 +3,7 @@ export interface IRoom {
     $oid: string;
   };
   name: string;
+  floor: number;
+  size: number;
   devices: string[];
 }

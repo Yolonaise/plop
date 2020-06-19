@@ -1,5 +1,4 @@
-import { IRoom } from "../models/room.model.ts";
-import { Injectable, Inject } from "../../deps.ts";
+import { Injectable, Inject, IRoom } from "../../deps.ts";
 import PlopContext from "./plop.context.ts";
 
 @Injectable()

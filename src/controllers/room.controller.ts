@@ -5,10 +5,10 @@ import {
   Post,
   Body,
   Put,
-  Delete
+  Delete,
+  IRoom
 } from '../../deps.ts';
 import { RoomService } from '../services/room.service.ts';
-import { IRoom } from '../models/room.model.ts';
 
 @Controller('/room')
 export class RoomController {

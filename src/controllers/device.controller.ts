@@ -5,10 +5,10 @@ import {
   Post,
   Body,
   Put,
-  Delete
+  Delete,
+  IDevice
 } from '../../deps.ts';
 import { DeviceService } from '../services/device.service.ts';
-import { IDevice } from '../models/device.model.ts';
 
 @Controller('/device')
 export class DeviceController {

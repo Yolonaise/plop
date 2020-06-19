@@ -3,16 +3,14 @@ import {
   Content,
   NotFoundError,
   Injectable,
-} from "../../deps.ts";
-import { DeviceRepository } from "../repository/device.repository.ts";
-import { IDevice } from "../models/device.model.ts";
-import { DeviceValidator } from "./validators/device.validator.ts";
-import { Rabbit } from "./rabbit.service.ts";
-import {
+  IDevice,
   createDeviceCreated,
   createDeviceUpdated,
   createDeviceDeleted,
-} from "../models/rabbit/helper/device.factory.ts";
+} from "../../deps.ts";
+import { DeviceRepository } from "../repository/device.repository.ts";
+import { Rabbit } from "./rabbit.service.ts";
+import { DeviceValidator } from "./validators/device.validator.ts";
 
 @Injectable()
 export class DeviceService {

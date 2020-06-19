@@ -1,11 +1,10 @@
-import { Injectable, BadRequestError } from "../../../deps.ts";
+import { Injectable, BadRequestError, IRoom } from "../../../deps.ts";
 import { IValidator } from "./validator.interface.ts";
-import { IRoom } from "../../models/room.model.ts";
 
 @Injectable()
 export class RoomValidator implements IValidator<IRoom> {
   onCreate(model: IRoom): void {
-    if(!model) {
+    if (!model) {
       throw new BadRequestError("Request is not correct");
     }
     if (!model.name || model.name == "") {
@@ -14,7 +13,7 @@ export class RoomValidator implements IValidator<IRoom> {
   }
 
   onUpdate(model: IRoom): void {
-    if(!model) {
+    if (!model) {
       throw new BadRequestError("Request is not correct");
     }
     if (!model._id || !model._id.$oid || model._id.$oid == "") {

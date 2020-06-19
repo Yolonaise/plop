@@ -1,12 +1,15 @@
-import { Injectable, Inject, Content, NotFoundError } from "./../../deps.ts";
-import { RoomRepository } from "../repository/room.repository.ts";
-import { IRoom } from "../models/room.model.ts";
-import { Rabbit } from "./rabbit.service.ts";
 import {
+  Injectable,
+  Inject,
+  Content,
+  NotFoundError,
+  IRoom,
   createRoomCreated,
   createRoomUpdated,
   createRoomDeleted,
-} from "../models/rabbit/helper/rooms.factory.ts";
+} from "./../../deps.ts";
+import { RoomRepository } from "../repository/room.repository.ts";
+import { Rabbit } from "./rabbit.service.ts";
 import { RoomValidator } from "./validators/room.validator.ts";
 import { DeviceRepository } from "../repository/device.repository.ts";
 import { mapToIds } from "../helpers/mongo.helper.ts";

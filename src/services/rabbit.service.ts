@@ -3,10 +3,10 @@ import {
   RabbitFactory,
   TopicProducer,
   Producer,
+  RoomMessage,
+  DeviceMessage,
 } from "../../deps.ts";
 import { rabbitConfig } from "../configurations/configuration.ts";
-import { RoomMessage } from "../models/rabbit/rooms.message.ts";
-import { DeviceMessage } from "../models/rabbit/device.message.ts";
 
 @Singleton()
 export class Rabbit {

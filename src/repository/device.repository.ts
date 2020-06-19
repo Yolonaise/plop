@@ -1,8 +1,8 @@
 import {
   Injectable,
   Inject,
+  IDevice,
 } from "../../deps.ts";
-import { IDevice } from "../models/device.model.ts";
 import PlopContext from "./plop.context.ts";
 
 @Injectable()

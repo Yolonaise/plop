@@ -1,6 +1,5 @@
-import { Injectable, BadRequestError } from "../../../deps.ts";
+import { Injectable, BadRequestError, IDevice } from "../../../deps.ts";
 import { IValidator } from "./validator.interface.ts";
-import { IDevice } from "../../models/device.model.ts";
 
 @Injectable()
 export class DeviceValidator implements IValidator<IDevice> {

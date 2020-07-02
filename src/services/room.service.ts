@@ -69,7 +69,7 @@ export class RoomService {
 
   async validateDevices(room: IRoom): Promise<any> {
     if (!room.devices) {
-      return [];
+      return;
     }
 
     const exists = (await this.deviceRepo

@@ -1,10 +1,12 @@
 import { apiConfig, dbConfig } from "./configurations/configuration.ts";
 import { PlopBuilder, Content, HttpError } from "../deps.ts";
-import { HomeArea } from "./controllers/areas/home.area.ts";
 import { RoomArea } from "./controllers/areas/room.area.ts";
 import { DeviceArea } from "./controllers/areas/device.area.ts";
 import { LogMiddleware } from "./middlewares/log.middleware.ts";
 import PlopContext from "./repository/plop.context.ts";
+import { VersionArea } from "./controllers/areas/version.area.ts";
+import { HomeArea } from "./controllers/areas/home.area.ts";
+import { FloorArea } from "./controllers/areas/floor.area.ts";
 
 export async function main(_: string[] = []): Promise<void> {
   console.log(
@@ -26,9 +28,11 @@ export async function main(_: string[] = []): Promise<void> {
         )
           .useSettings(
             (s) =>
-              s.addArea(() => HomeArea)
+              s.addArea(() => VersionArea)
+                .addArea(() => HomeArea)
                 .addArea(() => RoomArea)
                 .addArea(() => DeviceArea)
+                .addArea(() => FloorArea)
                 .addMiddleware(() => LogMiddleware)
                 .withLogging(false),
           )
@@ -51,7 +55,7 @@ export async function main(_: string[] = []): Promise<void> {
           .withConfig(dbConfig),
     )
     .build();
-  // nothing interresting here
+
   console.log(`******* Plopping ******`);
 }
 

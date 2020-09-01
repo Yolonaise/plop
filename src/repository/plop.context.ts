@@ -30,7 +30,6 @@ export default class PlopContext {
     maintDatabase = mainClient.database(`${dbConfig.database}`);
 
     homes = maintDatabase.collection("Homes");
-    console.log(homes);
     rooms = maintDatabase.collection("Rooms");
     devices = maintDatabase.collection("Devices");
     floors = maintDatabase.collection("Floors");

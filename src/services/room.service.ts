@@ -27,7 +27,7 @@ export class RoomService {
     return await this.repo.getAllAsync();
   }
 
-  async getRoomAsync(id: string): Promise<IRoom> {
+  async getRoomAsync(id: string): Promise<IRoom | null> {
     this.validator.onGet(id);
     return await this.repo.getRoomAsync(id);
   }

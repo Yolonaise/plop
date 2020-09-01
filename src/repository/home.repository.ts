@@ -1,60 +1,37 @@
-import { Injectable, Inject, IHome } from "../../deps.ts";
+import { Injectable, Inject, IHome, ObjectId } from "../../deps.ts";
 import PlopContext from "./plop.context.ts";
 
 @Injectable()
 export class HomeRepository {
+  
   constructor(@Inject(PlopContext) private context: PlopContext) {}
 
   async getAllAsync(): Promise<IHome[]> {
-    return await this.context.sendRequestAsync(
-      this.context.homes(),
-      (c) => c.find(),
-    );
+    return await this.context.homes().find();
   }
 
   async getFilteredAsync(filter: object): Promise<IHome[]> {
-    return await this.context.sendRequestAsync(
-      this.context.homes(),
-      (c) => c.find(filter),
-    );
+    return await this.context.homes().find(filter);
   }
 
-  async getHomeAsync(id: string): Promise<IHome> {
-    return await this.context.sendRequestAsync(
-      this.context.homes(),
-      (c) => c.findOne({ _id: { $oid: id } }),
-    );
+  async getHomeAsync(id: string): Promise<IHome | null> {
+    return await this.context.homes().findOne({ _id: ObjectId(id) });
   }
 
   async existsAsync(id: string): Promise<boolean> {
-    const res = await this.context.sendRequestAsync(
-      this.context.homes(),
-      (c) => c.findOne({ _id: { $oid: id } }),
-    );
-    return res != undefined;
+    return await this.getHomeAsync(id) != undefined;
   }
 
   async createHomeAsync(home: IHome): Promise<IHome> {
-    delete home._id;
-    const id = await this.context.sendRequestAsync(
-      this.context.homes(),
-      (c) => c.insertOne(home),
-    );
+    const id = await this.context.homes().insertOne(home)
     return { ...home, _id: id };
   }
 
   async updateHomeAsync(home: IHome): Promise<IHome> {
-    await this.context.sendRequestAsync(
-      this.context.homes(),
-      (c) => c.updateOne({ _id: home._id }, home),
-    );
-    return { ...home };
+    return await this.context.homes().updateOne({ _id: home._id }, home);
   }
 
   async deleteHomeAsync(id: string): Promise<any> {
-    await this.context.sendRequestAsync(
-      this.context.homes(),
-      (c) => c.deleteOne({ _id: { $oid: id } }),
-    );
+    await this.context.homes().deleteOne({ _id: ObjectId(id)});
   }
 }

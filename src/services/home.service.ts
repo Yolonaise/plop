@@ -27,7 +27,7 @@ export class HomeService {
     return await this.repo.getAllAsync();
   }
 
-  async getHomeAsync(id: string): Promise<IHome> {
+  async getHomeAsync(id: string): Promise<IHome | null> {
     this.validator.onGet(id);
     return await this.repo.getHomeAsync(id);
   }
@@ -61,7 +61,9 @@ export class HomeService {
   async deleteHomeAsync(id: string): Promise<any> {
     this.validator.onDelete(id);
     const home = await this.repo.getHomeAsync(id);
-    
+    if(home == null)
+      throw new NotFoundError("No home found");
+
     home.floors.forEach(async(f) => {
       this.floorRepo.deleteFloorAsync(f);
     });

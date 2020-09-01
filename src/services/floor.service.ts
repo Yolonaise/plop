@@ -29,7 +29,7 @@ export class FloorService {
     return await this.repo.getAllAsync();
   }
 
-  async getFloorAsync(id: string): Promise<IFloor> {
+  async getFloorAsync(id: string): Promise<IFloor | null> {
     this.validator.onGet(id);
     return await this.repo.getFloorAsync(id);
   }

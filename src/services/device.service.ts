@@ -24,7 +24,7 @@ export class DeviceService {
     return await this.repo.getAllAsync();
   }
 
-  async getDeviceAsync(id: string): Promise<IDevice> {
+  async getDeviceAsync(id: string): Promise<IDevice | null> {
     this.validator.onGet(id);
     return await this.repo.getDeviceAsync(id);
   }

@@ -1,63 +1,37 @@
-import {
-  Injectable,
-  Inject,
-  IDevice,
-} from "../../deps.ts";
+import { Injectable, Inject, IDevice, ObjectId } from "../../deps.ts";
 import PlopContext from "./plop.context.ts";
 
 @Injectable()
 export class DeviceRepository {
+
   constructor(@Inject(PlopContext) private context: PlopContext) {}
 
   async existsAsync(id: string): Promise<boolean> {
-    const res = await this.context.sendRequestAsync(
-      this.context.devices(),
-      (c) => c.findOne({ _id: { $oid: id } }),
-    );
-    return res !== undefined;
+    return await this.getDeviceAsync(id) !== undefined;
   }
 
   async getAllAsync(): Promise<IDevice[]> {
-    return await this.context.sendRequestAsync(
-      this.context.devices(),
-      (c) => c.find(),
-    );
+    return await this.context.devices().find();
   }
 
   async getFilteredAsync(filter: object): Promise<IDevice[]> {
-    return await this.context.sendRequestAsync(
-      this.context.devices(),
-      (c) => c.find(filter),
-    );
+    return await this.context.devices().find(filter);
   }
 
-  async getDeviceAsync(id: string): Promise<IDevice> {
-    return await this.context.sendRequestAsync(
-      this.context.devices(),
-      (c) => c.findOne({ _id: { $oid: id } }),
-    );
+  async getDeviceAsync(id: string): Promise<IDevice | null> {
+    return await this.context.devices().findOne({ _id: ObjectId(id) });
   }
 
   async createDeviceAsync(device: IDevice): Promise<IDevice> {
-    delete device._id;
-    const id = await this.context.sendRequestAsync(
-      this.context.devices(),
-      (c) => c.insertOne(device),
-    );
+    const id = await this.context.devices().insertOne(device)
     return { ...device, _id: id };
   }
 
   async updateDeviceAsync(device: IDevice): Promise<IDevice> {
-    return await this.context.sendRequestAsync(
-      this.context.devices(),
-      (c) => c.updateOne({ _id: device._id }, device),
-    );
+    return await this.context.devices().updateOne({ _id: device._id }, device)
   }
 
   async deleteDeviceAsync(id: string): Promise<any> {
-    await this.context.sendRequestAsync(
-      this.context.devices(),
-      (c) => c.deleteOne({ _id: { $oid: id } }),
-    );
+    await this.context.devices().deleteOne({ _id: ObjectId(id) })
   }
 }

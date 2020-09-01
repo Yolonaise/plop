@@ -3,16 +3,19 @@ import {
   MongoClient,
   Database,
   Collection,
-  InternalServerError,
+  IFloor,
+  IRoom,
+  IHome,
+  IDevice,
 } from "../../deps.ts";
 import { dbConfig } from "../configurations/configuration.ts";
 
 let mainClient: MongoClient;
 let maintDatabase: Database;
-let rooms: Collection;
-let homes: Collection;
-let devices: Collection;
-let floors: Collection;
+let rooms: Collection<IRoom>;
+let homes: Collection<IHome>;
+let devices: Collection<IDevice>;
+let floors: Collection<IFloor>;
 
 @Injectable()
 export default class PlopContext {
@@ -27,6 +30,7 @@ export default class PlopContext {
     maintDatabase = mainClient.database(`${dbConfig.database}`);
 
     homes = maintDatabase.collection("Homes");
+    console.log(homes);
     rooms = maintDatabase.collection("Rooms");
     devices = maintDatabase.collection("Devices");
     floors = maintDatabase.collection("Floors");
@@ -46,20 +50,5 @@ export default class PlopContext {
 
   floors() {
     return floors;
-  }
-
-  async sendRequestAsync(
-    collection: Collection,
-    func: (c: Collection) => Promise<any>,
-  ): Promise<any> {
-    try {
-      if (!collection) {
-        throw new InternalServerError("no collection provided");
-      }
-      return await func(collection);
-    } catch (err) {
-      console.log({ err });
-      throw new InternalServerError("diplo has failed");
-    }
   }
 }

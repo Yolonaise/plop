@@ -13,7 +13,7 @@ scripts:
     tsconfig: tsconfig.json
     env:
       API_CONFIGURATION: 'dev.local'
-      API_PORT: 8080
+      API_PORT: 5200
       API_HOSTNAME: 'localhost'
       DB_HOST: 'localhost'
       DB_PORT: 27017 
